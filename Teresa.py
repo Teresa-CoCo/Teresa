@@ -241,8 +241,6 @@ def spark(input):
     import re
     # 星火认知大模型Spark Max的URL值（https://www.xfyun.cn/doc/spark/Web.html）
     SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
-    # 星火认知大模型调用秘钥信息（https://console.xfyun.cn/services/bm35）
-
     # 星火认知大模型Spark Max的domain值（https://www.xfyun.cn/doc/spark/Web.html）
     SPARKAI_DOMAIN = 'generalv3.5'
 
