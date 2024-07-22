@@ -19,6 +19,7 @@
 - Clone the repo.
 - Run "pip install -r requirements.txt" to install modules.
 - Run teresa.py and have fun.
+- Use "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini;. --add-data logo.ico;.  Teresa.py" ---To have excusive file.
 
 ## 📜Licence
 GPL V3
