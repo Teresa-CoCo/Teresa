@@ -51,6 +51,10 @@ base_path = getattr(sys,'_MEIPASS',os.path.dirname(os.path.abspath(__file__)))
 configs = os.path.join(base_path, 'secret.ini')
 logo = os.path.join(base_path, 'logo.ico')
 appid, api_secret, api_key = read_config(configs)
+SPARKAI_APP_ID = appid
+SPARKAI_API_SECRET = api_secret
+SPARKAI_API_KEY = api_key
+
 imageunderstanding_url = "wss://spark-api.cn-huabei-1.xf-yun.com/v2.1/image"  # 识图云端环境的服务地址
 answer =" "
 def take_screenshot():
@@ -238,9 +242,7 @@ def spark(input):
     # 星火认知大模型Spark Max的URL值（https://www.xfyun.cn/doc/spark/Web.html）
     SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
     # 星火认知大模型调用秘钥信息（https://console.xfyun.cn/services/bm35）
-    SPARKAI_APP_ID = '0fe0137a'
-    SPARKAI_API_SECRET = 'NTNjZjMxYjViNzg4NzZmZjg2ZDNkNTcz'
-    SPARKAI_API_KEY = '3e7db6b9b6ccd9c677c0e836ceda744c'
+
     # 星火认知大模型Spark Max的domain值（https://www.xfyun.cn/doc/spark/Web.html）
     SPARKAI_DOMAIN = 'generalv3.5'
 
