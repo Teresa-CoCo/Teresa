@@ -1,1 +1,4 @@
 secret.ini
+/dist
+/build
+/LifeTool/__pycache__

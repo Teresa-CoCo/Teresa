@@ -47,8 +47,10 @@ def read_config(filename='config.ini'):
     api_key = config.get('Credentials', 'api_key')
     
     return appid, api_secret, api_key
-
-appid, api_secret, api_key = read_config("secret.ini")
+base_path = getattr(sys,'_MEIPASS',os.path.dirname(os.path.abspath(__file__)))
+configs = os.path.join(base_path, 'secret.ini')
+logo = os.path.join(base_path, 'logo.ico')
+appid, api_secret, api_key = read_config(configs)
 imageunderstanding_url = "wss://spark-api.cn-huabei-1.xf-yun.com/v2.1/image"  # 识图云端环境的服务地址
 answer =" "
 def take_screenshot():
@@ -300,7 +302,7 @@ def LifeTool():
 root = tk.Tk()
 root.title("Teresa")
 
-root.iconbitmap('logo.ico')
+root.iconbitmap(logo)
 
 root.resizable(False, False)
 
