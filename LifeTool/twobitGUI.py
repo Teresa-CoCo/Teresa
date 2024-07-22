@@ -19,11 +19,11 @@ class BinaryDecimalConverterGUI:
     def binary_to_decimal(self):
         input_value = self.get_input("请输入一个二进制数:")
         if input_value is not None:
-            try:
-                binary_number = int(input_value)
+            if self.is_valid_binary(input_value):
+                binary_number = input_value  # 输入的二进制数（字符串）
                 decimal_number = self.convert_binary_to_decimal(binary_number)
                 messagebox.showinfo("转换结果", f"二进制数 {binary_number} 转换为十进制为 {decimal_number}")
-            except ValueError:
+            else:
                 messagebox.showerror("错误", "请输入有效的二进制数")
 
     def decimal_to_binary(self):
@@ -39,28 +39,22 @@ class BinaryDecimalConverterGUI:
     def get_input(self, prompt):
         return tk.simpledialog.askstring("输入", prompt)
 
-    def convert_binary_to_decimal(self, n):
+    def is_valid_binary(self, s):
+        return all(c in '01' for c in s)  # 检查字符串是否只包含 '0' 和 '1'
+
+    def convert_binary_to_decimal(self, binary_number):
         decimal_number = 0
-        i = 0
-        while n != 0:
-            remainder = n % 10
-            n //= 10
-            decimal_number += remainder * pow(2, i)
-            i += 1
+        power = len(binary_number) - 1
+        for digit in binary_number:
+            decimal_number += int(digit) * (2 ** power)
+            power -= 1
         return decimal_number
 
     def convert_decimal_to_binary(self, n):
-        binary_number = 0
-        i = 1
-        while n != 0:
-            remainder = n % 2
-            n //= 2
-            binary_number += remainder * i
-            i *= 10
-        return binary_number
+        return bin(n)[2:]  # 使用内置函数 bin() 将十进制数转换为二进制字符串，并去除前缀 '0b'
 
 def GUI():
-        # 创建主窗口
+    # 创建主窗口
     root = tk.Tk()
     app = BinaryDecimalConverterGUI(root)
     root.mainloop()
