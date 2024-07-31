@@ -8,8 +8,9 @@
 - [x] AI Chat with LLM.
 - [x] ToolBox of life.
 - [x] See your screen and understand the screen.
+- [x] Have a cool outlook.(Based on QT)
 - [ ] Help you operate the system.
-- [ ] Have a cool outlook.
+
 
 ## 🛠️How to run
 - Run go to the Release to download exe version.
@@ -23,3 +24,8 @@
 
 ## 📜Licence
 GPL V3
+
+## 🙏Thanks to
+![VS code](https://github.com/user-attachments/assets/67c65899-7e32-4cae-aa7c-0df9e39fa463)
+
+![QT](https://github.com/user-attachments/assets/75425013-3642-4549-99e5-3400fbb5a66c)
