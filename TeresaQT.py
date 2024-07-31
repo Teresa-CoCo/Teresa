@@ -36,6 +36,7 @@ sys.stdout = output
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtGui import QIcon
 
 def read_config(filename='config.ini'):
     config = configparser.ConfigParser()
@@ -60,7 +61,8 @@ answer =" "
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("Teresa QT")
+        Dialog.setWindowIcon(QIcon("logo.ico"))
         Dialog.resize(383, 341)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(141, 141, 141))
@@ -176,7 +178,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Teresa QT"))
         self.pushButton.setText(_translate("Dialog", "询问"))
         self.pushButton_2.setText(_translate("Dialog", "TRSTool 工具箱"))
         self.pushButton_3.setText(_translate("Dialog", "屏幕理解"))
@@ -366,6 +368,9 @@ class Ui_Dialog(object):
         # file_path = os.path.join(exe_dir, 'screenshot.png')
         output_text = self.ImageUnderstand("screenshot.png")
         self.plainTextEdit_2.setPlainText(output_text + "\n")
+        current_value = self.lcdNumber.value()
+        new_value = current_value + 1
+        self.lcdNumber.display(new_value)
     def spark(self,input):
         from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
         from sparkai.core.messages import ChatMessage
@@ -408,6 +413,9 @@ class Ui_Dialog(object):
         output_text = self.spark(input_text)  # 调用 self.spark 方法并传递输入文本
         current_text = self.plainTextEdit_2.toPlainText()
         self.plainTextEdit_2.setPlainText(current_text + output_text + "\n")
+        current_value = self.lcdNumber.value()
+        new_value = current_value + 1
+        self.lcdNumber.display(new_value)
 
 
 class MyDialog(QtWidgets.QDialog, Ui_Dialog):
