@@ -20,7 +20,7 @@
 - Clone the repo.
 - Run "pip install -r spark_ai_python pillow websocket-client Credentials" to install modules.(Some moudle may need C++ compiler so you need have MSVC 2022 C++ x86 build tool and Windows 11 SDK)
 - Run teresa.py and have fun.
-- Use "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini;. --add-data logo.ico;.  Teresa.py" ---To have excusive file.
+- Use "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini:. --add-data logo.ico:. TeresaQT.py"(QT version) or "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini:. --add-data logo.ico:. Teresa.py"(Non-QT version) ---To have excusive file.
 
 ## 📜Licence
 GPL V3
