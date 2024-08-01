@@ -37,14 +37,14 @@ execute_whiptail() {
     touch "$result_file"
     while true; do
         # 使用whiptail显示输入框获取用户输入
-        input=$(whiptail --inputbox "请输入一些内容：" 10 40 --title "输入框示例" 3>&1 1>&2 2>&3)
+        input=$(whiptail --inputbox "请输入一些内容：" 10 40 --title "Teresa Linux" 3>&1 1>&2 2>&3)
 
         if [ $? -eq 0 ]; then
             result=$(echo "$input" | python3 TeresaLinux.py)
             echo "$result" >> "$result_file"
             records=$(cat "$result_file" | awk '{printf "%s\\n", $0}')
             # --scrolltext选项来显示更多的回复内容
-            whiptail --msgbox "$records" 15 60 --scrolltext --title "处理结果"
+            whiptail --msgbox "$records" 15 60 --scrolltext --title "Teresa Linux"
         else
             echo "您取消了输入。"
             break
