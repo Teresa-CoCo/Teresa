@@ -13,7 +13,8 @@
 
 
 ## 🛠️How to run
-- Run go to the Release to download exe version.
+- Run go to the Release to download exe version.(Windows)
+- First clone the repo, then "sudo chmod +x TeresaLinux.sh", at last "./TeresaLinux.sh"(You need a secret.ini in the running folder.)
 
 ## ⚗️How to build
 
