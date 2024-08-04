@@ -25,6 +25,7 @@ import configparser
 from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
 from sparkai.core.messages import ChatMessage
 import re
+import qdarkstyle
 original_stdout = sys.stdout
 output = io.StringIO()
 sys.stdout = output
@@ -472,6 +473,12 @@ class MyDialog(QtWidgets.QDialog, Ui_Dialog):
 def main():
     app = QApplication(sys.argv)
     dialog = MyDialog()
+    # setup stylesheet
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    # or in new API
+    app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt5'))
+
+
     dialog.show()
     sys.exit(app.exec())
 
