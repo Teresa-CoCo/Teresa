@@ -444,7 +444,11 @@ class Ui_Dialog(object):
         current_value = self.lcdNumber.value()
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
-
+        
+        history_head="您的问题："+input_text
+        history_content="AI回答："+output_text
+        history=history_head+"\n"+history_content+"\n"
+        self.plainTextEdit_3.setPlainText(history)
 
 class MyDialog(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self):
