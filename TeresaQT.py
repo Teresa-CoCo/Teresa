@@ -474,9 +474,9 @@ def main():
     app = QApplication(sys.argv)
     dialog = MyDialog()
     # setup stylesheet
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
     # or in new API
-    app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt5'))
+    app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt6'))
 
 
     dialog.show()
