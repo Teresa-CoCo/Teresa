@@ -61,7 +61,8 @@ answer =" "
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("Teresa QT")
+        Dialog.setWindowIcon(QIcon("logo.ico"))
         Dialog.resize(383, 341)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(141, 141, 141))
@@ -169,7 +170,7 @@ class Ui_Dialog(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_3 = QtWidgets.QPushButton(parent=self.tab)
         self.pushButton_3.setGeometry(QtCore.QRect(300, 120, 71, 51))
-        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.setObjectName("pushButton_3")        
         self.pushButton = QtWidgets.QPushButton(parent=self.tab)
         self.pushButton.setGeometry(QtCore.QRect(300, 10, 71, 51))
         self.pushButton.setObjectName("pushButton")
@@ -190,13 +191,18 @@ class Ui_Dialog(object):
         self.plainTextEdit_3.setObjectName("plainTextEdit_3")
         self.tabWidget.addTab(self.tab_2, "")
 
+        #Push buttons
+        self.pushButton_3.clicked.connect(self.screenshot_and_ask)
+        self.pushButton_2.clicked.connect(self.open_life_tool)
+        self.pushButton.clicked.connect(self.talktospark)
+
         self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Teresa QT"))
         self.pushButton_2.setText(_translate("Dialog", "TRSTool 工具箱"))
         self.pushButton_3.setText(_translate("Dialog", "屏幕理解"))
         self.pushButton.setText(_translate("Dialog", "询问"))
