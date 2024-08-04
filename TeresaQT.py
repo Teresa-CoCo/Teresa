@@ -370,7 +370,7 @@ class Ui_Dialog(object):
                 a = 1
                 # text.clear
                 while (a == 1):
-                    Input = "请详细描述图内的信息"
+                    Input = "请详细描述图内的信息，为你后面回答我的问题提供更多准确信息"
                     question = checklen(getText("user", Input))
                     answer = ""
                     print("答:", end="")
