@@ -22,6 +22,9 @@ import websocket  # 使用websocket_client
 import os
 import sys
 import configparser
+from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
+from sparkai.core.messages import ChatMessage
+import re
 original_stdout = sys.stdout
 output = io.StringIO()
 sys.stdout = output
@@ -399,10 +402,8 @@ class Ui_Dialog(object):
         current_value = self.lcdNumber.value()
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
-    def spark(self,input,prompt):
-        from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
-        from sparkai.core.messages import ChatMessage
-        import re
+    def spark(self,messages):
+
         # 星火认知大模型Spark Max的URL值（https://www.xfyun.cn/doc/spark/Web.html）
         SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
         # 星火认知大模型Spark Max的domain值（https://www.xfyun.cn/doc/spark/Web.html）
@@ -415,12 +416,9 @@ class Ui_Dialog(object):
                 spark_api_key=SPARKAI_API_KEY,
                 spark_api_secret=SPARKAI_API_SECRET,
                 spark_llm_domain=SPARKAI_DOMAIN,
-                streaming=False,
+                streaming=True,
             )
-            messages = [ChatMessage(
-                role="user",
-                content=input+prompt
-            )]
+            
             handler = ChunkPrintHandler()
             result = spark.generate([messages], callbacks=[handler])
             a = str(result)
@@ -442,7 +440,9 @@ class Ui_Dialog(object):
         #Add prompt to the advanced tab
         prompt = self.plainTextEdit_4.toPlainText()
 
-        output_text = self.spark(input_text,prompt)  # 调用 self.spark 方法并传递输入文本
+        messages=[ChatMessage(role="user",content=prompt)]
+        messages.append(ChatMessage(role="user",content=input_text))
+        output_text = self.spark(messages)  # 调用 self.spark 方法并传递输入文本
         current_text = self.plainTextEdit_2.toPlainText()
         self.plainTextEdit_2.setPlainText(current_text + output_text + "\n")
         current_value = self.lcdNumber.value()
@@ -450,11 +450,19 @@ class Ui_Dialog(object):
         self.lcdNumber.display(new_value)
 
         #Add history to the history tab
-
         history_head="您的问题："+input_text
         history_content="AI回答："+output_text
-        history=history_head+"\n"+history_content+"\n"
-        self.plainTextEdit_3.setPlainText(history)
+        history = []
+        history.append(history_head)
+        history.append(history_content)
+        separator = "\n"
+        text = separator.join(history)
+
+        self.plainTextEdit_3.insertPlainText(text+"\n")
+        new_message1 = ChatMessage(role="assistant", content=output_text)
+        new_message2 = ChatMessage(role="assistant", content=output_text)
+        messages.append(new_message1)
+        messages.append(new_message2)
 
 class MyDialog(QtWidgets.QDialog, Ui_Dialog):
     def __init__(self):
