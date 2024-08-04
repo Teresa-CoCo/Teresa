@@ -181,7 +181,7 @@ class Ui_Dialog(object):
         self.plainTextEdit_4.setGeometry(QtCore.QRect(30, 50, 321, 221))
         self.plainTextEdit_4.setObjectName("plainTextEdit_4")
         self.label = QtWidgets.QLabel(parent=self.tab_3)
-        self.label.setGeometry(QtCore.QRect(40, 10, 181, 31))
+        self.label.setGeometry(QtCore.QRect(40, 10, 300, 31))
         self.label.setObjectName("label")
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_2 = QtWidgets.QWidget()
@@ -207,7 +207,7 @@ class Ui_Dialog(object):
         self.pushButton_3.setText(_translate("Dialog", "屏幕理解"))
         self.pushButton.setText(_translate("Dialog", "询问"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "询问"))
-        self.label.setText(_translate("Dialog", "请在下方输入你的提示词（prompt）"))
+        self.label.setText(_translate("Dialog", "请在下方输入你的提示词或记忆（prompt）"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Dialog", "高级"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "历史记录"))
 
@@ -399,7 +399,7 @@ class Ui_Dialog(object):
         current_value = self.lcdNumber.value()
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
-    def spark(self,input):
+    def spark(self,input,prompt):
         from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
         from sparkai.core.messages import ChatMessage
         import re
@@ -419,7 +419,7 @@ class Ui_Dialog(object):
             )
             messages = [ChatMessage(
                 role="user",
-                content=input
+                content=input+prompt
             )]
             handler = ChunkPrintHandler()
             result = spark.generate([messages], callbacks=[handler])
@@ -438,13 +438,19 @@ class Ui_Dialog(object):
                 print("Error 1")
     def talktospark(self):
         input_text = self.plainTextEdit.toPlainText()
-        output_text = self.spark(input_text)  # 调用 self.spark 方法并传递输入文本
+
+        #Add prompt to the advanced tab
+        prompt = self.plainTextEdit_4.toPlainText()
+
+        output_text = self.spark(input_text,prompt)  # 调用 self.spark 方法并传递输入文本
         current_text = self.plainTextEdit_2.toPlainText()
         self.plainTextEdit_2.setPlainText(current_text + output_text + "\n")
         current_value = self.lcdNumber.value()
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
-        
+
+        #Add history to the history tab
+
         history_head="您的问题："+input_text
         history_content="AI回答："+output_text
         history=history_head+"\n"+history_content+"\n"
