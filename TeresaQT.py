@@ -444,8 +444,8 @@ class Ui_Dialog(object):
         messages=[ChatMessage(role="user",content=prompt)]
         messages.append(ChatMessage(role="user",content=input_text))
         output_text = self.spark(messages)  # 调用 self.spark 方法并传递输入文本
-        current_text = self.plainTextEdit_2.toPlainText()
-        self.plainTextEdit_2.setPlainText(current_text + output_text + "\n")
+        # current_text = self.plainTextEdit_2.toPlainText()
+        self.plainTextEdit_2.setPlainText(output_text + "\n")
         current_value = self.lcdNumber.value()
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
