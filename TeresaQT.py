@@ -437,7 +437,8 @@ class Ui_Dialog(object):
                 print("Error 1")
     def talktospark(self):
         input_text = self.plainTextEdit.toPlainText()
-
+        if input_text == "":
+            QMessageBox.warning(self, 'Empty Input', '输入不能为空！')
         #Add prompt to the advanced tab
         prompt = self.plainTextEdit_4.toPlainText()
 
@@ -475,8 +476,6 @@ def main():
     dialog = MyDialog()
     # setup stylesheet
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
-    # or in new API
-    app.setStyleSheet(qdarkstyle.load_stylesheet(qt_api='pyqt6'))
 
 
     dialog.show()
