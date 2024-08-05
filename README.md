@@ -9,7 +9,7 @@
 - [x] ToolBox of life.
 - [x] See your screen and understand the screen.
 - [x] Have a cool outlook.(Based on QT)
-- [ ] Help you operate the system.
+- [x] Help you operate the system.(In Beta)
 
 
 ## 🛠️How to run
