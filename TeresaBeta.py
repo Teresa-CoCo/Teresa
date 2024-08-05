@@ -33,7 +33,6 @@ original_stdout = sys.stdout
 output = io.StringIO()
 sys.stdout = output
 
-
 # Form implementation generated from reading ui file 'dialog.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
@@ -231,6 +230,7 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.command_ran = False
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -522,15 +522,14 @@ class Ui_Dialog(object):
         ##Beta
     def helpmeoperate(self):
         messages=[]
-        flag = 0
         input_text = self.plainTextEdit_5.toPlainText()
         if input_text == "":
             QMessageBox.warning(self, 'Empty Input', '输入不能为空！')
-        if flag == 0:
+        if self.command_ran == False:
             prompt = "你是 Teresa，一位世界级的程序员，可以通过执行代码来完成任何目标。对于高级请求，请从编写计划开始。当您执行代码时，它将在 **用户的机器** 上执行。用户已授予您 **完全权限** 来执行完成任务所需的任何代码。执行代码。您可以访问互联网。运行 **任何代码** 来实现目标，如果一开始没有成功，请不断重试。您可以安装新pip软件包，但请用bat来实现安装新pip软件包。当用户引用文件名时，他们很可能指的是您当前正在执行代码的目录中的现有文件。一般来说，尝试以尽可能少的步骤 **制定计划**。至于实际执行代码来执行该计划，对于 *有状态* 语言（如 python、cmd，但不适用于每次都从 0 开始的 html）**重要的是不要尝试在一个代码块中完成所有事情。**您应该尝试一些事情，打印有关它的信息，然后从那里继续进行微小的、明智的步骤。你不可能第一次就成功，而且一次尝试往往会导致你看不到的错误。你有能力完成**任何**任务。请尽量使用Python来处理问题。当遇到取决于用户本身或用户电脑本身的信息时，请尽可能用Python来获取（如当前用户的用户名）。谢谢。"
             messages=[ChatMessage(role="user",content=prompt)]
             self.spark(messages)
-            flag = 1
+            self.command_ran = True
         messages.append(ChatMessage(role="user",content=input_text))
         output_text = self.spark(messages)  # 调用 self.spark 方法并传递输入文本
         # current_text = self.plainTextEdit_2.toPlainText()
