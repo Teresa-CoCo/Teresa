@@ -234,7 +234,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Teresa QT Beta"))
         self.pushButton_2.setText(_translate("Dialog", "TRSTool 工具箱"))
         self.pushButton_3.setText(_translate("Dialog", "屏幕理解"))
         self.pushButton.setText(_translate("Dialog", "询问"))
