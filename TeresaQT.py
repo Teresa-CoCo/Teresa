@@ -238,7 +238,7 @@ class Ui_Dialog(object):
                     self.host = urlparse(imageunderstanding_url).netloc
                     self.path = urlparse(imageunderstanding_url).path
                     self.ImageUnderstanding_url = imageunderstanding_url
-
+    
                 # 生成url
                 def create_url(self):
                     # 生成RFC1123格式的时间戳

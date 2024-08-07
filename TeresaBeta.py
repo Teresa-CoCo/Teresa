@@ -67,7 +67,8 @@ answer =" "
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("Teresa QT")
+        Dialog.setWindowIcon(QIcon("logo.ico"))
         Dialog.resize(383, 341)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(141, 141, 141))
@@ -377,6 +378,11 @@ class Ui_Dialog(object):
                                             on_open=on_open)
                 ws.appid = appid
                 # ws.imagedata = imagedata
+                                    sys.stdout = original_stdout
+                    output_text = output.getvalue()
+                    return output_text
+
+                    print(str(text))
                 ws.question = question
                 ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
 
