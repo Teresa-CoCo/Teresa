@@ -9,3 +9,4 @@ test.sh
 secrets.ini
 python_code.py
 cmd_code.py
+.venv

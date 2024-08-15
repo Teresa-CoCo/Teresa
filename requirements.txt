@@ -3,3 +3,4 @@ websocket-client
 Credentials
 spark_ai_python
 qdarkstyle
+PyQt6
