@@ -70,6 +70,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(383, 341)
         palette = QtGui.QPalette()
+        Dialog.setWindowIcon(QIcon("logo.ico"))
         brush = QtGui.QBrush(QtGui.QColor(141, 141, 141))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
         palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, brush)
