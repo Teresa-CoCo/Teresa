@@ -27,6 +27,7 @@ from sparkai.core.messages import ChatMessage
 import re
 import qdarkstyle
 import subprocess
+import sqlite3
 history = []
 # original_stdout = sys.stdout
 # output = io.StringIO()
@@ -69,7 +70,7 @@ class Ui_TabWidget(object):
     def setupUi(self, TabWidget):
         TabWidget.setObjectName("Teresa QT")
         TabWidget.setWindowIcon(QIcon("logo.ico"))
-        TabWidget.resize(383, 341)
+        TabWidget.resize(383, 358)
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.tab)
@@ -100,7 +101,7 @@ class Ui_TabWidget(object):
         self.plainTextEdit_6.setGeometry(QtCore.QRect(220, 60, 141, 191))
         self.plainTextEdit_6.setObjectName("plainTextEdit_6")
         self.label = QtWidgets.QLabel(parent=self.tab_2)
-        self.label.setGeometry(QtCore.QRect(40, 30, 71, 16))
+        self.label.setGeometry(QtCore.QRect(40, 30, 81, 16))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(parent=self.tab_2)
         self.label_2.setGeometry(QtCore.QRect(230, 30, 49, 16))
@@ -156,10 +157,28 @@ class Ui_TabWidget(object):
         self.pushButton_5.setObjectName("pushButton_5")
         TabWidget.addTab(self.tab_5, "")
 
+        # avatar
+
+        self.scene = QtWidgets.QGraphicsScene()
+        
+        self.pixmap = QtGui.QPixmap("R.png")  # 替换为你的头像图片路径
+        
+        target_width = 100
+        target_height = 125
+        scaled_pixmap = self.pixmap.scaled(target_width, target_height, QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+        
+        self.pixmapItem = QtWidgets.QGraphicsPixmapItem(scaled_pixmap)
+        
+        # 将头像添加到场景中
+        self.scene.addItem(self.pixmapItem)
+        
+        # 设置 QGraphicsView 的场景
+        self.graphicsView.setScene(self.scene)
                 #Push buttons
         self.pushButton_3.clicked.connect(self.screenshot_and_ask)
         self.pushButton_2.clicked.connect(self.open_life_tool)
         self.pushButton.clicked.connect(self.talktospark)
+        self.pushButton_5.clicked.connect(self.upgrade)
 
 
         self.retranslateUi(TabWidget)
@@ -191,6 +210,28 @@ class Ui_TabWidget(object):
         self.pushButton_5.setText(_translate("TabWidget", "升级"))
         TabWidget.setTabText(TabWidget.indexOf(self.tab_5), _translate("TabWidget", "用户中心"))
 
+    def setUsername(self,username):
+        self.label_7.setText(username)
+    def setUserGroup(self,username):
+        conn = sqlite3.connect('user_data.db')
+        cursor = conn.cursor()
+        # 查询用户组
+        cursor.execute('''
+        SELECT user_group FROM users WHERE username = ?
+        ''', (username,))
+        # 获取结果
+        user_group = cursor.fetchone()
+        conn.close()
+        # 检查是否找到匹配的记录
+        if user_group:
+            if user_group[0] =="Advanced":
+                self.label_5.setText("高级版")
+                self.comboBox.setEnabled(False)
+                self.pushButton_5.setEnabled(False)
+            else:
+                self.label_5.setText("免费版")
+        else:
+            self.label_5.setText("未知")
 
     def take_screenshot(self):
         try:
@@ -392,11 +433,17 @@ class Ui_TabWidget(object):
         new_value = current_value + 1
         self.lcdNumber.display(new_value)
     def spark(self,messages):
-
         # 星火认知大模型Spark Max的URL值（https://www.xfyun.cn/doc/spark/Web.html）
-        SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
-        # 星火认知大模型Spark Max的domain值（https://www.xfyun.cn/doc/spark/Web.html）
-        SPARKAI_DOMAIN = 'generalv3.5'
+        if self.label_5 =="高级版":
+            SPARKAI_URL = 'wss://spark-api.xf-yun.com/v3.5/chat'
+            # 星火认知大模型Spark Max的domain值（https://www.xfyun.cn/doc/spark/Web.html）
+            SPARKAI_DOMAIN = 'generalv3.5'
+        else :
+            # 对应Spark Lite版本
+            SPARKAI_URL = 'wss://spark-api.xf-yun.com/v1.1/chat'
+            SPARKAI_DOMAIN = 'general'
+        
+
 
         if __name__ == '__main__':
             spark = ChatSparkLLM(
@@ -508,43 +555,119 @@ class Ui_TabWidget(object):
             self.getpythonandrun(output_text)
         else:
             print('取消操作')
+    def upgrade(self):
+        QMessageBox.information(self, "提示", f"升级功能暂未开放")
 
 
 
-# TODO: 1.登入模块 2.头像部分 3.用SQLite写数据库（写两个用户） 4.优化“帮我操作”生成代码的过程 5.如果还有时间，开发个安卓版本
+# TODO: 1.登入模块（已完成） 
+# 2.头像部分 （已完成）
+# 3.用SQLite写数据库（写两个用户）（已完成） 
+# 4.优化“帮我操作”生成代码的过程 
+# 5.如果还有时间，开发个安卓版本
 # TODO: 免费版：能够免费使用SparkLite模型，但无法使用“帮我操作”功能，每个月能有几次试用高级版机会。
 # 高级版：能够使用SparkMax模型（或Spark4.0 Ultra），具有完全态功能，提供客户支持。
 
+
 # 1.登入模块
-def login():
 
+# 登入UI
 
-# 2.数据库模块
-def database():
+# 数据库模块
+def check_login(username, password):
+    # 连接到数据库
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    # 查询用户
+    cursor.execute('''
+    SELECT * FROM users WHERE username = ? AND password = ?
+    ''', (username, password))
+    # 获取结果
+    user = cursor.fetchone()
+    conn.close()
+    # 检查是否找到匹配的记录
+    if user:
+        return True
+    else:
+        return False
 
-
-# 升级到高级版恩妞逻辑
-def upgrade():
-
-
-
-class MyDialog(QtWidgets.QDialog, Ui_TabWidget):
+class LoginUI(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    TabWidget = QtWidgets.QTabWidget()
-    # setup stylesheet
-    ui = Ui_TabWidget()
-    ui.setupUi(TabWidget)
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Teresa QT")
+        Dialog.setWindowIcon(QIcon("logo.ico"))
+        Dialog.resize(383,151)
+        self.buttonBox = QtWidgets.QDialogButtonBox(parent=Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(50, 100, 341, 32))
+        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Close | QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setCenterButtons(False)
+        self.buttonBox.setObjectName("buttonBox")
+        self.lineEdit = QtWidgets.QLineEdit(parent=Dialog)
+        self.lineEdit.setGeometry(QtCore.QRect(180, 30, 161, 21))
+        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_2 = QtWidgets.QLineEdit(parent=Dialog)
+        self.lineEdit_2.setGeometry(QtCore.QRect(180, 70, 161, 21))
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.label = QtWidgets.QLabel(parent=Dialog)
+        self.label.setGeometry(QtCore.QRect(80, 30, 49, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(parent=Dialog)
+        self.label_2.setGeometry(QtCore.QRect(80, 70, 49, 16))
+        self.label_2.setObjectName("label_2")
 
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
+        self.label.setText("用户名：")
+        self.label_2.setText("密码：")
+        self.buttonBox.accepted.connect(self.loginLogic)
+        self.buttonBox.rejected.connect(self.close)
+        Dialog.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
+
+    def loginLogic(self):
+        username = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        if check_login(username, password):
+            QMessageBox.information(self, "提示", f"登录成功，欢迎 {username}")
+            self.close()  # 关闭登录界面
+            self.open_teresa_ui(username)
+        else:
+            QMessageBox.warning(self, "提示", "登录失败，请检查用户名或密码")
+
+    def open_teresa_ui(self,username):
+        app = QtWidgets.QApplication.instance()  # 获取当前的应用实例
+        if not app:
+            app = QtWidgets.QApplication(sys.argv)
+        self.teresa_ui = TeresaUI(username)
+        self.teresa_ui.show()
+        app.exec()
 
 
-    TabWidget.show()
-    sys.exit(app.exec())
+
+# 调用TeresaUI逻辑
+class TeresaUI(QtWidgets.QMainWindow):
+    def __init__(self,username):
+        super().__init__()
+        self.setWindowTitle("Teresa QT")
+        self.setWindowIcon(QIcon("logo.ico"))
+        self.setGeometry(100, 100, 383, 358)
+        self.tab_widget = QtWidgets.QTabWidget(self)
+        self.setCentralWidget(self.tab_widget)
+        self.username = username
+
+        # 使用 Ui_TabWidget 设置标签页内容
+        self.ui = Ui_TabWidget()
+        self.ui.setupUi(self.tab_widget)
+        # 传递用户名
+        self.ui.setUsername(self.username)
+        self.ui.setUserGroup(self.username)
+        # 设置样式表
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
 
 if __name__ == "__main__":
-    main()
+    app = QtWidgets.QApplication(sys.argv)
+    login_ui = LoginUI()
+    login_ui.show()
+    sys.exit(app.exec())
