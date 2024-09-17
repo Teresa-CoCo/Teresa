@@ -161,7 +161,7 @@ class Ui_TabWidget(object):
 
         self.scene = QtWidgets.QGraphicsScene()
         
-        self.pixmap = QtGui.QPixmap("R.png")  # 替换为你的头像图片路径
+        self.pixmap = QtGui.QPixmap(os.path.join(base_path, 'R.png'))  # 替换为你的头像图片路径
         
         target_width = 100
         target_height = 125
@@ -214,7 +214,7 @@ class Ui_TabWidget(object):
     def setUsername(self,username):
         self.label_7.setText(username)
     def setUserGroup(self,username):
-        conn = sqlite3.connect('user_data.db')
+        conn = sqlite3.connect(os.path.join(base_path, 'user_data.db'))
         cursor = conn.cursor()
         # 查询用户组
         cursor.execute('''
@@ -577,7 +577,7 @@ class Ui_TabWidget(object):
 # 数据库模块
 def check_login(username, password):
     # 连接到数据库
-    conn = sqlite3.connect('user_data.db')
+    conn = sqlite3.connect(os.path.join(base_path, 'user_data.db'))
     cursor = conn.cursor()
     # 查询用户
     cursor.execute('''
@@ -599,7 +599,7 @@ class LoginUI(QtWidgets.QDialog):
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Teresa QT")
-        Dialog.setWindowIcon(QIcon("logo.ico"))
+        Dialog.setWindowIcon(QIcon(os.path.join(base_path, 'logo.ico')))
         Dialog.resize(383,151)
         self.buttonBox = QtWidgets.QDialogButtonBox(parent=Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(50, 100, 341, 32))
