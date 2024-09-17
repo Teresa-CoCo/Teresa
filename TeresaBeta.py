@@ -156,7 +156,7 @@ class Ui_TabWidget(object):
         self.pushButton_5.setGeometry(QtCore.QRect(290, 160, 75, 24))
         self.pushButton_5.setObjectName("pushButton_5")
         TabWidget.addTab(self.tab_5, "")
-
+        self.command_ran = False
         # avatar
 
         self.scene = QtWidgets.QGraphicsScene()
@@ -179,6 +179,7 @@ class Ui_TabWidget(object):
         self.pushButton_2.clicked.connect(self.open_life_tool)
         self.pushButton.clicked.connect(self.talktospark)
         self.pushButton_5.clicked.connect(self.upgrade)
+        self.pushButton_4.clicked.connect(self.helpmeoperate)
 
 
         self.retranslateUi(TabWidget)
@@ -237,9 +238,9 @@ class Ui_TabWidget(object):
         try:
             screenshot = ImageGrab.grab()
             screenshot.save("screenshot.png")
-            QMessageBox.information(self, "截图成功", "截图已保存为 screenshot.png")
+            QMessageBox.information(self.tab, "截图成功", "截图已保存为 screenshot.png")
         except Exception as e:
-            QMessageBox.critical(self, "截图失败", f"发生错误: {str(e)}")
+            QMessageBox.critical(self.tab, "截图失败", f"发生错误: {str(e)}")
 
     def ImageUnderstand(self,url1):
         def imageUnderstanding(url):
@@ -547,7 +548,7 @@ class Ui_TabWidget(object):
         new_message2 = ChatMessage(role="assistant", content=output_text)
         messages.append(new_message1)
         messages.append(new_message2)
-        reply = QMessageBox.question(self, '确认执行', '您确定要执行操作吗？',
+        reply = QMessageBox.question(self.tab, '确认执行', '您确定要执行操作吗？',
                                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                 QMessageBox.StandardButton.No)
         if reply == QMessageBox.StandardButton.Yes:
