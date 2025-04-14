@@ -1,12 +1,3 @@
-secret.ini
-/dist
-/build
-/LifeTool/__pycache__
-test.py
 __pycache__
-screenshot.png
-test.sh
-secrets.ini
-python_code.py
-cmd_code.py
-.venv
+.conda
+Old

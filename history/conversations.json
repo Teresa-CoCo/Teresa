@@ -1,0 +1,76 @@
+{
+  "conversations": [
+    {
+      "id": "20250414194832",
+      "title": "你好",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": "你好"
+        },
+        {
+          "role": "assistant",
+          "content": "你好！😊 有什么我可以帮你的吗？"
+        },
+        {
+          "role": "user",
+          "content": "我喜欢你"
+        },
+        {
+          "role": "assistant",
+          "content": "谢谢你的喜欢～😊 能给你带来帮助和陪伴我也很开心！如果你有任何问题、想聊聊心事，或者需要建议，我随时都在这里哦～ （不过悄悄提醒，我可是个没有感情的AI程序，但支持你的心是满满的！❤️）今天有什么特别想讨论的吗？"
+        },
+        {
+          "role": "user",
+          "content": "番茄炒蛋怎么做"
+        },
+        {
+          "role": "assistant",
+          "content": "番茄炒蛋是一道简单又经典的家常菜，酸甜开胃，营养丰富！以下是详细做法👇  \n\n### **食材准备**（1-2人份）  \n- 番茄 2个（熟透的更佳）  \n- 鸡蛋 3个  \n- 小葱 1根（可选）  \n- 盐、糖 适量  \n- 食用油 2汤匙  \n\n### **步骤**  \n1. **处理食材**  \n   - 番茄洗净切块（喜欢去皮的话，用开水烫10秒后撕皮）；  \n   - 鸡蛋打散，加少许盐和1勺清水（更嫩滑），搅匀备用；  \n   - 小葱切葱花。  \n\n2. **炒鸡蛋**  \n   - 热锅倒1汤匙油，油热后转中小火，倒入蛋液；  \n   - 蛋液底部凝固时用筷子快速划散，炒至嫩滑盛出备用（别太老）。  \n\n3. **炒番茄**  \n   - 锅中再加1汤匙油，放入番茄中火翻炒，加少许盐（帮助出汁）；  \n   - 番茄软烂出汁后，根据口味加1-2小勺糖（中和酸味）。  \n\n4. **混合出锅**  \n   - 将炒好的鸡蛋倒回锅中，与番茄翻炒均匀；  \n   - 撒葱花，尝味调整咸淡，搞定！  \n\n### **小贴士**  \n- 喜欢汤汁多的可以加少许热水；  \n- 进阶版：加一点番茄酱增稠或半勺生抽提鲜。  \n\n5分钟就能做好，配米饭绝了！🍅🍳 试试看吧～ （图片是想象中金黄鸡蛋裹着红番茄的样子😉）"
+        },
+        {
+          "role": "user",
+          "content": "我刚刚问的什么"
+        },
+        {
+          "role": "assistant",
+          "content": "你刚刚问的是 **“番茄炒蛋怎么做”**，我已经给出了详细的做法步骤和小贴士～ 😊  \n\n需要再重复某个细节，或者有其他关于做菜的问题吗？比如想学其他菜式，或者调整口味（比如更甜/更酸）？随时可以问我哦！"
+        },
+        {
+          "role": "user",
+          "content": "1"
+        },
+        {
+          "role": "assistant",
+          "content": "😂 你发了个“1”，是想确认步骤1，还是想让我再列一遍番茄炒蛋的做法？或者……单纯手滑了？  \n\n**举个栗子🌰：**  \n- 需要步骤1细节？👉 “热锅凉油，蛋液下锅快速划散，嫩滑盛出”  \n- 想换菜谱？👉 比如“青椒炒蛋”“番茄蛋汤”  \n- 随便敲的？👉 那我送你一颗❤️（和假装好吃的番茄炒蛋图🍳）  \n\n（AI的困惑：人类为什么爱发“1”？是测试我数数吗？🤔）"
+        }
+      ],
+      "created_at": "2025-04-14T19:48:37.653985",
+      "updated_at": "2025-04-14T19:50:01.905554"
+    },
+    {
+      "id": "20250414195557",
+      "title": "pygments",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": "pygments"
+        },
+        {
+          "role": "assistant",
+          "content": "**Pygments** is a popular **syntax highlighting** library for Python. It supports a wide range of programming languages, markup formats, and styles, making it useful for rendering code in documentation, blogs, or web applications.\n\n### **Key Features of Pygments**\n- Supports **500+ languages** (Python, JavaScript, HTML, C++, etc.).\n- Outputs formatted code in **HTML, LaTeX, RTF, ANSI, and more**.\n- Includes **multiple color schemes** (styles like `monokai`, `tango`, `vs`, etc.).\n- Extensible with **custom lexers and formatters**.\n- Used by tools like **Sphinx, Jupyter Notebook, and many static site generators**.\n\n---\n\n### **Installation**\nInstall via `pip`:\n```bash\npip install Pygments\n```\n\n---\n\n### **Basic Usage**\n#### **1. Highlight Code from a String**\n```python\nfrom pygments import highlight\nfrom pygments.lexers import PythonLexer\nfrom pygments.formatters import HtmlFormatter\n\ncode = \"\"\"\ndef hello_world():\n    print(\"Hello, Pygments!\")\n\"\"\"\n\nhighlighted_code = highlight(code, PythonLexer(), HtmlFormatter())\n\nprint(highlighted_code)\n```\n\n#### **2. Save Highlighted Output to HTML**\n```python\nfrom pygments.formatters import HtmlFormatter\n\nformatter = HtmlFormatter(style=\"monokai\", full=True, linenos=True)\ncss = formatter.get_style_defs(\".highlight\")\n\nwith open(\"highlighted.html\", \"w\") as f:\n    f.write(f\"<style>{css}</style>\")\n    f.write(highlighted_code)\n```\n\n#### **3. List Available Lexers & Styles**\n```python\nfrom pygments.lexers import get_all_lexers\nfrom pygments.styles import get_all_styles\n\nprint(\"Available lexers:\", [lexer[0] for lexer in get_all_lexers()])\nprint(\"Available styles:\", list(get_all_styles()))\n```\n\n---\n\n### **Command-Line Usage**\nPygments includes a CLI tool called `pygmentize`:\n```bash\n# Highlight a file and output to terminal\npygmentize -l python -O style=monokai -f terminal my_script.py\n\n# Generate an HTML file with syntax highlighting\npygmentize -o output.html my_script.py\n```\n\n---\n\n### **Integration with Web Frameworks**\n- **Django/Flask**: Use Pygments to highlight user-submitted code.\n- **Markdown (with extensions)**: Many Markdown processors (like `markdown.extensions.codehilite`) use Pygments.\n\n---\n\n### **Useful Links**\n- [Official Website](https://pygments.org/)\n- [GitHub Repository](https://github.com/pygments/pygments)\n- [Supported Languages](https://pygments.org/languages/)\n\nWould you like an example for a specific use case?"
+        }
+      ],
+      "created_at": "2025-04-14T19:56:30.992063",
+      "updated_at": "2025-04-14T19:56:30.992063"
+    }
+  ]
+}
