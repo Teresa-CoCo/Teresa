@@ -1,0 +1,10 @@
+Collecting PyQt6
+  Downloading pyqt6-6.9.1-cp39-abi3-win_amd64.whl.metadata (2.2 kB)
+Collecting PyQt6-sip<14,>=13.8 (from PyQt6)
+  Downloading pyqt6_sip-13.10.2-cp311-cp311-win_amd64.whl.metadata (515 bytes)
+Collecting PyQt6-Qt6<6.10.0,>=6.9.0 (from PyQt6)
+  Downloading pyqt6_qt6-6.9.1-py3-none-win_amd64.whl.metadata (551 bytes)
+Downloading pyqt6-6.9.1-cp39-abi3-win_amd64.whl (25.7 MB)
+   ---------------------------------------- 25.7/25.7 MB 7.5 MB/s eta 0:00:00
+Downloading pyqt6_qt6-6.9.1-py3-none-win_amd64.whl (73.8 MB)
+   -----------                              20.7/73.8 MB 11.5 MB/s eta 0:00:05

@@ -1,0 +1,11 @@
+# Teresa V2 Requirements
+# Core Dependencies
+PyQt6>=6.6.0
+openai>=1.0.0
+
+# Optional Dependencies for Enhanced Features
+# pygments>=2.17.0  # For syntax highlighting
+# markdown>=3.5.0   # For Markdown rendering
+# reportlab>=4.0.0  # For PDF export
+# pillow>=10.0.0    # For image processing
+# requests>=2.31.0  # For HTTP requests
