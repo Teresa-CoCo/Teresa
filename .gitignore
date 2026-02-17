@@ -6,4 +6,4 @@ test.py
 __pycache__
 screenshot.png
 test.sh
-secrets.ini
+secrets.ini.DS_Store
