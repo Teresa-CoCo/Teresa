@@ -15,7 +15,7 @@ pub struct ChatRequest {
 }
 
 #[tauri::command]
-pub async fn ping_host(host: String) -> Result<String, String> {
+async fn ping_host(host: String) -> Result<String, String> {
     use std::process::Command;
     
     let output = if cfg!(target_os = "windows") {
@@ -34,7 +34,7 @@ pub async fn ping_host(host: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub fn get_app_version() -> String {
+fn get_app_version() -> String {
     env!("CARGO_PKG_VERSION").to_string()
 }
 

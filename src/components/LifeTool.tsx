@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calculator, Zap, Leaf, Network, Ruler, Binary, Gem } from 'lucide-react';
+import { Calculator, Zap, Network, Ruler, Binary, Gem } from 'lucide-react';
 import { 
   calculateBMI, 
   calculateElectric, 
