@@ -1,36 +1,9 @@
-# Dependencies
-node_modules/
-
-# Build outputs
-dist/
-target/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-npm-debug.log*
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Tauri
-src-tauri/target/
-
-# Misc
 secret.ini
-secrets.ini
-screenshot.png
+/dist
+/build
+/LifeTool/__pycache__
 test.py
+__pycache__
+screenshot.png
 test.sh
-__pycache__/
+secrets.ini
