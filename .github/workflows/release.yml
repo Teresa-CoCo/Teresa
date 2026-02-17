@@ -8,7 +8,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-
+permissions:
+  contents: write  # 允许创建 release 和上传附件
 jobs:
   build:
     strategy:
