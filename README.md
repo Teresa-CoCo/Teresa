@@ -1,32 +1,72 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/2b24e837-e891-4c11-ab88-04de3ce44a24" align = "centre" width="300" />
-  <p><em>🤖An AI based tool made by Python.🤖</em></p>
+  <img src="https://github.com/user-attachments/assets/2b24e837-e891-4c11-ab88-04de3ce44a24" align="centre" width="300" />
+  <p><em>🤖 An AI-based tool made with Tauri + React 🤖</em></p>
 </div>
 
 ---
-## ✨Features
-- [x] AI Chat with LLM.
-- [x] ToolBox of life.
-- [x] See your screen and understand the screen.
-- [x] Have a cool outlook.(Based on QT)
-- [ ] Help you operate the system.
 
+## ✨ Features
 
-## 🛠️How to run
-- Run go to the Release to download exe version.(Windows)
-- First clone the repo, then "sudo chmod +x TeresaLinux.sh", at last "./TeresaLinux.sh"(You need a secret.ini in the running folder.)
+- 💬 **AI Chat** - Chat with LLM models (OpenAI compatible API)
+- 🧰 **Life Toolbox** - BMI calculator, ping tool, lucky numbers, unit converter, etc.
+- 🎨 **Modern UI** - Beautiful interface with dark/light theme support
+- 🌐 **Cross-platform** - Windows, macOS, Linux support
 
-## ⚗️How to build
+## 🚀 Quick Start
 
-- Clone the repo.
-- Run "pip install -r spark_ai_python pillow websocket-client Credentials" to install modules.(Some moudle may need C++ compiler so you need have MSVC 2022 C++ x86 build tool and Windows 11 SDK)
-- Run teresa.py and have fun.
-- Use "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini:. --add-data logo.ico:. TeresaQT.py"(QT version) or "pyinstaller --onefile --icon=logo.ico --paths LifeTool --add-data secret.ini:. --add-data logo.ico:. Teresa.py"(Non-QT version) ---To have excusive file.
+### Prerequisites
 
-## 📜Licence
-GPL V3
+- [Node.js](https://nodejs.org/) 18+
+- [Rust](https://rustup.rs/)
+- [pnpm](https://pnpm.io/) (recommended) or npm/yarn
 
-## 🙏Thanks to
-![VS code](https://github.com/user-attachments/assets/67c65899-7e32-4cae-aa7c-0df9e39fa463)
+### Development
 
-![QT](https://github.com/user-attachments/assets/75425013-3642-4549-99e5-3400fbb5a66c)
+```bash
+# Install dependencies
+pnpm install
+
+# Run in development mode
+pnpm tauri dev
+```
+
+### Build
+
+```bash
+# Build for current platform
+pnpm tauri build
+
+# Or build for all platforms (requires cross-compilation setup)
+```
+
+## ⚙️ Configuration
+
+Configure your AI API in the app settings:
+
+| Setting | Description |
+|---------|-------------|
+| API URL | OpenAI compatible API endpoint |
+| API Key | Your API key |
+| Model | Model name (e.g., gpt-4, gpt-3.5-turbo) |
+
+## 📦 Supported Platforms
+
+- 🖥️ Windows (x64)
+- 🍎 macOS (Intel & Apple Silicon)
+- 🐧 Linux (AppImage, deb)
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 18 + TypeScript + TailwindCSS
+- **Backend**: Tauri 2.0 (Rust)
+- **Build**: Vite
+
+## 📜 License
+
+GPL-3.0
+
+## 🙏 Thanks to
+
+![VS Code](https://github.com/user-attachments/assets/67c65899-7e32-4cae-aa7c-0df9e39fa463)
+
+![Tauri](https://github.com/user-attachments/assets/75425013-3642-4549-99e5-3400fbb5a66c)
