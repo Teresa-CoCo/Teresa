@@ -51,7 +51,11 @@ async fn capture_screenshot() -> Result<String, String> {
         .capture()
         .map_err(|e| format!("截图失败: {}", e))?;
 
-    let png_bytes = image.to_png(None).map_err(|e| format!("编码 PNG 失败: {}", e))?;
+    let mut png_bytes: Vec<u8> = Vec::new();
+    let mut cursor = std::io::Cursor::new(&mut png_bytes);
+    image
+        .write_to(&mut cursor, screenshots::image::ImageFormat::Png)
+        .map_err(|e| format!("编码 PNG 失败: {}", e))?;
     let b64 = general_purpose::STANDARD.encode(&png_bytes);
     Ok(format!("data:image/png;base64,{}", b64))
 }
