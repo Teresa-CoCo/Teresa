@@ -1,4 +1,4 @@
-import { AIConfig, ChatMessage, ChatChunk } from '../types';
+import { AIConfig, ChatMessage, ChatChunk, MessageContentPart } from '../types';
 
 export async function* streamChat(
   config: AIConfig,
@@ -47,9 +47,10 @@ export async function* streamChat(
 
       try {
         const chunk: ChatChunk = JSON.parse(data);
-        const content = chunk.choices[0]?.delta?.content;
-        if (content) {
-          yield content;
+        const rawContent = chunk.choices[0]?.delta?.content;
+        if (rawContent) {
+          const content = typeof rawContent === 'string' ? rawContent : '';
+          if (content) yield content;
         }
       } catch {
         // Skip invalid JSON
