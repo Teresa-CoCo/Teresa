@@ -1,4 +1,4 @@
-import { AIConfig, ChatMessage, ChatChunk, MessageContentPart } from '../types';
+import { AIConfig, ChatMessage, ChatChunk } from '../types';
 
 export async function* streamChat(
   config: AIConfig,
