@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Save, Check } from 'lucide-react';
+import { Save, Check, Eye, EyeOff } from 'lucide-react';
 import { AIConfig } from '../types';
 
 interface SettingsProps {
@@ -11,13 +11,96 @@ export function Settings({ config, onSave }: SettingsProps) {
   const [apiUrl, setApiUrl] = useState(config.apiUrl);
   const [apiKey, setApiKey] = useState(config.apiKey);
   const [model, setModel] = useState(config.model);
+  const [visionEnabled, setVisionEnabled] = useState(config.visionEnabled ?? false);
   const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
-    onSave({ apiUrl, apiKey, model });
+    onSave({ apiUrl, apiKey, model, visionEnabled });
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
+
+  return (
+    <div className="p-6 max-w-2xl mx-auto">
+      <h2 className="text-2xl font-bold mb-6">⚙️ 设置</h2>
+      
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-2">API 地址</label>
+          <input
+            type="text"
+            value={apiUrl}
+            onChange={(e) => setApiUrl(e.target.value)}
+            placeholder="https://api.openai.com/v1"
+            className="w-full rounded-lg border p-2 dark:bg-gray-800 dark:border-gray-600"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            支持 OpenAI 兼容 API (如 OpenAI, Azure, Claude, 讯飞, 智谱等)
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">API Key</label>
+          <input
+            type="password"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+            placeholder="sk-..."
+            className="w-full rounded-lg border p-2 dark:bg-gray-800 dark:border-gray-600"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">模型名称</label>
+          <input
+            type="text"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            placeholder="gpt-4o"
+            className="w-full rounded-lg border p-2 dark:bg-gray-800 dark:border-gray-600"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            支持视觉的模型: gpt-4o, gpt-4-turbo, claude-3-opus, gemini-pro-vision 等
+          </p>
+        </div>
+
+        {/* 视觉功能开关 */}
+        <div className="flex items-center justify-between rounded-lg border p-4 dark:border-gray-600">
+          <div>
+            <div className="flex items-center gap-2 font-medium">
+              {visionEnabled ? <Eye size={18} className="text-blue-500" /> : <EyeOff size={18} className="text-gray-400" />}
+              视觉功能（截图 / 图片上传）
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              启用后可在聊天中截取屏幕或上传图片发送给 AI，需要模型支持视觉输入
+            </p>
+          </div>
+          <button
+            onClick={() => setVisionEnabled((v) => !v)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              visionEnabled ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+                visionEnabled ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+        </div>
+
+        <button
+          onClick={handleSave}
+          className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+        >
+          {saved ? <Check size={20} /> : <Save size={20} />}
+          {saved ? '已保存' : '保存设置'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="p-6 max-w-2xl mx-auto">

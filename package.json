@@ -1,6 +1,6 @@
 {
   "name": "teresa",
-  "version": "2.0.0-preview",
+  "version": "3.0.0",
   "description": "AI based tool made with Tauri + React",
   "type": "module",
   "scripts": {

@@ -66,7 +66,20 @@ jobs:
         with:
           tagName: ${{ github.ref_name }}
           releaseName: 'Teresa AI v__VERSION__'
-          releaseBody: 'See the assets to download this version and install.'
+          releaseBody: |
+            ## Teresa AI v__VERSION__
+
+            ### 新功能
+            - 📷 **视觉功能**：支持截图或上传图片发送给 AI，AI 根据图片内容进行分析和回复（需模型支持视觉输入，如 gpt-4o、claude-3 等）
+            - 🖼️ 聊天窗口内置截图按钮与图片上传按钮，发送前可预览并移除待发图片
+
+            ### 下载说明
+            - **Windows**：下载 `.msi` 或 `.exe` 安装包
+            - **macOS (Intel)**：下载 `.dmg`（无 `aarch64` 后缀）
+            - **macOS (Apple Silicon)**：下载 `aarch64` 版 `.dmg`
+            - **Linux**：下载 `.deb` 或 `.AppImage`
+
+            See the assets to download this version and install.
           releaseDraft: true
-          prerelease: true
+          prerelease: false
           args: ${{ matrix.args }}
